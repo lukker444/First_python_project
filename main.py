@@ -5,25 +5,29 @@ def Manager():
     print("To delete an exersise: 4")
     print("To quit the program:   0")
 
+
 def Dict_Exersise(name, description, priority, status):
-   dict_exersise = {"name": name, "description": description, "priority": priority, "status": status}
+   dict_exersise = {}
+   dict_exersise["id"] = id
+   dict_exersise["name"] = name
+   dict_exersise["description"] = description
+   dict_exersise["priority"] = priority
+   dict_exersise["status"] = status
    return dict_exersise
 
-def Saving_Exersises_To_File(name, description, priority, status):
-    with open("list.txt", "a") as file:
-        #file.write(f"Id: {id_exersise}")
-        file.write(f"\nName: {name}")
-        file.write(f"\nDescription: {description}")
-        file.write(f"\nPriority: {priority}")
-        file.write(f"\nStatus: {status}\n")
-        
 
-def create_exercise():
+
+def Saving_Exersises_To_File():
+    with open("list.txt", "a") as file:
+        file.write(f"{str(dict_exersise)}\n")
+
+def create_exercise():  
     name = input("Name: ")
     description = input("Description ")
     priority = input("Priority low/mid/high: ")
     status = input("Status new/processing/end: ")
     return name, description, priority, status
+    
 
 starting_code = input("To start anything enter start: ")
 if starting_code == "start":
@@ -34,8 +38,9 @@ if starting_code == "start":
             break
         elif choosing_number == "1":
             name, description, priority, status = create_exercise()
-            Saving_Exersises_To_File(name, description, priority, status)
-            Dict_Exersise(name, description, priority, status)
+            dict_exersise = Dict_Exersise(name, description, priority, status)
+            Saving_Exersises_To_File()
+            
         
 
 
