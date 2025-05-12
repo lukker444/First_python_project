@@ -11,10 +11,19 @@ def Dict_Exersise(name, description, priority, status):
 
 def Saving_Exersises_To_File(name, description, priority, status):
     with open("list.txt", "a") as file:
-        file.write(f"Name: {name}")
+        #file.write(f"Id: {id_exersise}")
+        file.write(f"\nName: {name}")
         file.write(f"\nDescription: {description}")
         file.write(f"\nPriority: {priority}")
-        file.write(f"\nStatus: {status}")
+        file.write(f"\nStatus: {status}\n")
+        
+
+def create_exercise():
+    name = input("Name: ")
+    description = input("Description ")
+    priority = input("Priority low/mid/high: ")
+    status = input("Status new/processing/end: ")
+    return name, description, priority, status
 
 starting_code = input("To start anything enter start: ")
 if starting_code == "start":
@@ -24,12 +33,11 @@ if starting_code == "start":
         if choosing_number == "0":
             break
         elif choosing_number == "1":
-            name_of_exersise = input("Write a name of exersise: ")
-            description_of_exersise = input("Write an exersise: ")
-            exersise_priority = input("Input a priority of exersise low/mid/high: ")
-            exersise_status = input("Status of exersise new/processing/end: ")
-            Saving_Exersises_To_File(name_of_exersise, description_of_exersise, exersise_priority, exersise_status)
-            Dict_Exersise(name_of_exersise, description_of_exersise, exersise_priority, exersise_status)
+            name, description, priority, status = create_exercise()
+            Saving_Exersises_To_File(name, description, priority, status)
+            Dict_Exersise(name, description, priority, status)
+        
+
 
 
 
