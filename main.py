@@ -13,7 +13,8 @@ def creating_list_from_file():
         helper_list = []
         final_list = []
         with open("list.txt", "r") as file:
-            first_append_list = file.read().split("|")
+            a = file.read().strip()
+            first_append_list = a.split("|")
         for i in first_append_list:
             k = i.split("/")
             second_append_list.append(k)
@@ -40,10 +41,11 @@ def saving_exersises_to_file():
     with open("list.txt", "r") as file:
         reading_file = file.read()
     with open("list.txt", "a") as file:
-        if reading_file.startswith("i"):
-            file.write(f"|id-{id}/name-{name}/description-{description}/priority-{priority}/status-{status}")
+        if not reading_file:
+            file.write(f"id-{id}/name-{name}/description-{description}/priority-{priority}/status-{status}")    
         else:
-            file.write(f"id-{id}/name-{name}/description-{description}/priority-{priority}/status-{status}")
+            file.write(f"|id-{id}/name-{name}/description-{description}/priority-{priority}/status-{status}")
+            
    
 def create_exercise():  
     name = input("Name: ")
@@ -51,7 +53,31 @@ def create_exercise():
     priority = input("Priority low/mid/high: ")
     status = input("Status new/processing/end: ")
     return name, description, priority, status
+
+def deleating_exersise_by_id(n):
+    try:
+        for i in list2:
+            if int(i["id"]) == n:
+                list2.remove(i)
+        return list2
+    except(TypeError):
+        print("This id doesn't exist")
     
+
+
+
+def rewriting_exersise():
+    with open("list.txt", "r") as file:
+        reading_file = file.read()
+    with open("list.txt", "w") as file:
+        for i in list2:
+            if not reading_file:
+                file.write(f"id-{i["id"]}/name-{i["name"]}/description-{i["description"]}/priority-{i["priority"]}/status-{i["status"]}")
+            else:
+                file.write(f"|id-{i["id"]}/name-{i["name"]}/description-{i["description"]}/priority-{i["priority"]}/status-{i["status"]}")
+                
+
+
 starting_code = input("To start anything enter start: ")
 if starting_code == "start":
     while True:
@@ -64,9 +90,9 @@ if starting_code == "start":
             list1 = creating_list_from_file()
             id = id_counter()
             saving_exersises_to_file()
-            
-        
-
-
-
+        elif choosing_number == "4":
+            list2 = creating_list_from_file()
+            del_exersise = int(input("Enter id of exersise you want to delete: "))
+            deleating_exersise_by_id(del_exersise)
+            rewriting_exersise()
 
