@@ -1,12 +1,12 @@
-def Manager():
+def manager():
     print("To create an exersise: 1")
     print("To see exersises:      2")
     print("To update an exersise: 3")
     print("To delete an exersise: 4")
     print("To quit the program:   0")
 
-
-def Dict_Exersise(name, description, priority, status):
+id = 0
+def dict_exersise(name, description, priority, status):
    dict_exersise = {}
    dict_exersise["id"] = id
    dict_exersise["name"] = name
@@ -17,7 +17,7 @@ def Dict_Exersise(name, description, priority, status):
 
 
 
-def Saving_Exersises_To_File():
+def saving_exersises_to_file():
     with open("list.txt", "a") as file:
         file.write(f"{str(dict_exersise)}\n")
 
@@ -32,14 +32,14 @@ def create_exercise():
 starting_code = input("To start anything enter start: ")
 if starting_code == "start":
     while True:
-        Manager()
+        manager()
         choosing_number = input("What do you want to do: ")
         if choosing_number == "0":
             break
         elif choosing_number == "1":
             name, description, priority, status = create_exercise()
-            dict_exersise = Dict_Exersise(name, description, priority, status)
-            Saving_Exersises_To_File()
+            dict_exersise = dict_exersise(name, description, priority, status)
+            saving_exersises_to_file()
             
         
 
