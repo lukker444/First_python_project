@@ -118,13 +118,13 @@ def create_exercise():
 #Создание задачи с проверками
     while True:
         name = input("Name: ")
-        if name == "":
+        if name == "" or name.startswith(" "):
             print("Name can't be empty")
         else:
             break
     while True:
         description = input("Description: ")
-        if description == "":
+        if description == "" or description.startswith(" "):
             print("Description can't be empty")
         else:
             break
@@ -184,32 +184,32 @@ def redacting_exercise(n):
     try:
         for i in main_list:
             if int(i["id"]) == n:
-                field_to_redact = input("What do you want to redact name|description|priority|status: ")
-            while True:
-                if g == "name" or g == "description" or g == "priority" or g == "status":
-                    break
-                else:
-                    g = input("You can only write name|description|priority|status: ")
+                g = input("What do you want to redact name|description|priority|status: ")
+                while True:
+                    if g == "name" or g == "description" or g == "priority" or g == "status":
+                        break
+                    else:
+                        g = input("You can only write name|description|priority|status: ")
         if g == "name":
             p = input("Please rename your exersise: ")
             while True:
-                if p == "":
-                    print("Name can't be empty")
+                if p == "" or p.startswith(" "):
+                    p = input("Name can't be empty: ")
                 else:
                     break
             i["name"] = p
-        elif g == "description":
+        elif g == "description": 
             p = input("Please redact your description: ")
             while True:
-                if p == "":
-                    print("Description can't be empty")
+                if p == "" or p.startswith(" "):
+                    p = input("Description can't be empty: ")
                 else:
                     break
             i["description"] = p
         elif g == "priority":
             while True:
                 p = input("Please redact your priority: ")
-                if p == "new" or p == "processing" or p == "end":
+                if p == "low" or p == "mid" or p == "high":
                     i["priority"] = p
                     break     
                 else:
@@ -263,7 +263,7 @@ if starting_code == "start":
             if main_list != None:
                 while True:
                     try:
-                        redact_exersise = int(input("Enter id of exersise you want to readct: "))
+                        redact_exersise = int(input("Enter id of exersise you want to redact: "))
                         break
                     except(ValueError):
                         print("Input must be integer")
@@ -272,7 +272,7 @@ if starting_code == "start":
                     rewriting_exersise(redacted_list)
                 else:
                     rewriting_exersise(main_list)
-                print("Exercise was successfully redacted")
+                
             else:
                 print("There isn't any exersise in file")
                 input()
